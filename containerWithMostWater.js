@@ -2,8 +2,8 @@
 possible container of water using two array elements as the sides 
 and the space between array indices as the bottom. 
 */
-// answer should be 32
-const array = [5, 8, 10, 3, 7, 12];
+// answer should be 48
+const array = [5, 8, 16, 3, 7, 12];
 
 function biggestContainer(array) {
   let maxArea = 0;
@@ -28,3 +28,27 @@ function biggestContainer(array) {
 }
 
 console.log(biggestContainer(array));
+
+function biggestContainerOptimized(heights) {
+  let maxArea = 0;
+  let start = 0;
+  let end = heights.length - 1;
+
+  while (start < end) {
+    const leftSide = heights[start];
+    const rightSide = heights[end];
+    const width = end - start;
+
+    if (leftSide < rightSide) {
+      maxArea = leftSide * width;
+      start += 1;
+    } else {
+      maxArea = rightSide * width;
+      end -= 1;
+    }
+  }
+
+  return maxArea;
+}
+
+console.log(biggestContainerOptimized(array));
